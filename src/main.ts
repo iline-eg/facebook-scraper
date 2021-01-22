@@ -8,7 +8,7 @@ import ObjectsToCsv = require("objects-to-csv");
 
 config();
 
-export const main = async () => {
+(async () => {
   console.log(colors.FgWhite, "please make sure that your TOKEN in .env file");
   if (!process.env.TOKEN) {
     console.log(colors.FgRed, "token not found");
@@ -39,6 +39,4 @@ export const main = async () => {
   );
 
   await new ObjectsToCsv(users).toDisk(result.resultFile);
-};
-
-main();
+})();
