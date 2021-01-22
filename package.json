@@ -28,7 +28,6 @@
   "dependencies": {
     "@types/jest": "^26.0.20",
     "fb": "^2.0.0",
-    "puppeteer": "^5.5.0",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.1"
   }
