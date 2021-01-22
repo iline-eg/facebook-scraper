@@ -6,8 +6,8 @@ export interface CategoryList {
 export interface From {
   name: string;
   id: string;
-  category: string;
-  category_list: CategoryList[];
+  category?: string;
+  category_list?: CategoryList[];
 }
 
 export interface MessageTag {

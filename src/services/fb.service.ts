@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import { FormatterService } from "./formatter.service";
 import { HttpClientService } from "./http-client.service";
 import { Comment, CommentPaging, Paging } from "../interfaces";
+import { colors } from "../constants/colors";
 
 @injectable()
 export class FbService {
@@ -23,11 +24,20 @@ export class FbService {
     next = response.data.paging.next;
     comments.push(...data);
     while (next) {
-      const nextResponse = await this.httpClientService.get<CommentPaging>(
-        next
-      );
-      comments.push(...nextResponse.data.data);
-      next = nextResponse.data.paging.next;
+      try {
+        const nextResponse = await this.httpClientService.get<CommentPaging>(
+          next
+        );
+        comments.push(...nextResponse.data.data);
+        next = nextResponse.data.paging.next;
+        process.stdout.clearLine(0); // clear current text
+        process.stdout.cursorTo(0); // move cursor to beginning of line
+        process.stdout.write(
+          `${colors.FgBlue} number of comments ${comments.length}`
+        );
+      } catch (e) {
+        console.warn("error while get comments", e);
+      }
     }
     return comments;
   }
