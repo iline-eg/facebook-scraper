@@ -37,6 +37,8 @@ export class FbService {
         );
       } catch (e) {
         console.warn("error while get comments", e);
+        console.log(colors.FgRed, "FACEBOOK BLOCKED YOU ");
+        next = null;
       }
     }
     return comments;
